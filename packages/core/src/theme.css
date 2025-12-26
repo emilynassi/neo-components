@@ -1,0 +1,24 @@
+@theme {
+  /* Colors */
+  --color-neo-primary: #3b82f6;
+  --color-neo-secondary: #facc15;
+  --color-neo-danger: #ef4444;
+  --color-neo-success: #22c55e;
+  --color-neo-white: #ffffff;
+  --color-neo-black: #000000;
+
+  /* Shadows */
+  --shadow-neo: 6px 6px 0px 0px rgba(0, 0, 0, 1);
+  --shadow-neo-sm: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+  --shadow-neo-hover: 3px 3px 0px 0px rgba(0, 0, 0, 1);
+
+  /* Border width */
+  --border-width-neo: 4px;
+
+  /* Typography */
+  --font-grotesk: 'Space Grotesk', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  /* Transitions */
+  --transition-duration-neo: 150ms;
+}
