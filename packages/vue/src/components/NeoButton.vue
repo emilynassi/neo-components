@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { getContrastTextColor } from '@neobrut/core';
 
 interface NeoButtonProps {
-  primaryColor?: string;
-  textColor?: string;
+  color?: 'primary' | 'secondary' | 'danger' | 'success' | 'white' | string;
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
@@ -11,7 +11,7 @@ interface NeoButtonProps {
 }
 
 const props = withDefaults(defineProps<NeoButtonProps>(), {
-  primaryColor: '#4C7BF4',
+  color: 'primary',
   size: 'md',
   disabled: false,
   type: 'button',
@@ -22,40 +22,47 @@ const emit = defineEmits<{
   click: [event: MouseEvent];
 }>();
 
-const computedTextColor = computed(() => {
-  if (props.textColor) return props.textColor;
-
-  if (props.primaryColor === '#FFFFFF' || props.primaryColor?.toLowerCase() === '#fff') {
-    return '#000';
-  }
-
-  try {
-    const hex = props.primaryColor!.replace('#', '');
-    const r = parseInt(hex.substring(0, 2), 16);
-    const g = parseInt(hex.substring(2, 4), 16);
-    const b = parseInt(hex.substring(4, 6), 16);
-    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-    return brightness < 128 ? '#fff' : '#000';
-  } catch {
-    return '#000';
-  }
-});
-
-const sizeClasses: Record<string, string> = {
-  sm: 'px-3 py-1.5 text-sm',
-  md: 'px-6 py-3 text-lg',
-  lg: 'px-8 py-4 text-xl',
+const presetColors: Record<string, string> = {
+  primary: 'bg-neo-primary text-neo-white',
+  secondary: 'bg-neo-secondary text-neo-black',
+  danger: 'bg-neo-danger text-neo-white',
+  success: 'bg-neo-success text-neo-white',
+  white: 'bg-neo-white text-neo-black',
 };
 
+const sizeClasses: Record<string, string> = {
+  sm: 'px-3 py-1.5 text-sm shadow-neo-sm',
+  md: 'px-6 py-3 text-lg shadow-neo',
+  lg: 'px-8 py-4 text-xl shadow-neo',
+};
+
+// Check if color is a preset or a custom value
+const isCustomColor = computed(() => {
+  return !(props.color in presetColors);
+});
+
 const buttonClasses = computed(() => [
-  'border-4 border-black font-bold shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]',
+  'border-4 border-black font-bold',
   sizeClasses[props.size],
+  // Only apply preset color classes if not a custom color
+  !isCustomColor.value && presetColors[props.color],
   {
-    'hover:translate-x-1 hover:translate-y-1 hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-2 active:translate-y-2 active:shadow-none transition-all': !props.disabled,
+    'hover:translate-x-1 hover:translate-y-1 hover:shadow-neo-hover active:translate-x-1.5 active:translate-y-1.5 active:shadow-none transition-all': !props.disabled,
     'rotate-1': props.rotate,
     'opacity-50 cursor-not-allowed': props.disabled,
   },
 ]);
+
+// Only compute these for custom colors
+const customStyles = computed(() => {
+  if (!isCustomColor.value) {
+    return {};
+  }
+  return {
+    backgroundColor: props.color,
+    color: getContrastTextColor(props.color),
+  };
+});
 
 const handleClick = (event: MouseEvent) => {
   if (!props.disabled) {
@@ -69,10 +76,7 @@ const handleClick = (event: MouseEvent) => {
     :type="type"
     :class="buttonClasses"
     :disabled="disabled"
-    :style="{
-      backgroundColor: primaryColor,
-      color: computedTextColor,
-    }"
+    :style="customStyles"
     @click="handleClick"
   >
     <slot />

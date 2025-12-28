@@ -1,24 +1,65 @@
-@theme {
+/* =============================================
+   Consumer-overridable design tokens
+
+   Override these in your app's CSS:
+   :root {
+     --neo-primary: #8B5CF6;
+   }
+   ============================================= */
+
+:root {
   /* Colors */
-  --color-neo-primary: #3b82f6;
-  --color-neo-secondary: #facc15;
-  --color-neo-danger: #ef4444;
-  --color-neo-success: #22c55e;
-  --color-neo-white: #ffffff;
-  --color-neo-black: #000000;
+  --neo-primary: #3b82f6;
+  --neo-secondary: #facc15;
+  --neo-danger: #ef4444;
+  --neo-success: #22c55e;
+  --neo-white: #ffffff;
+  --neo-black: #000000;
 
   /* Shadows */
-  --shadow-neo: 6px 6px 0px 0px rgba(0, 0, 0, 1);
-  --shadow-neo-sm: 4px 4px 0px 0px rgba(0, 0, 0, 1);
-  --shadow-neo-hover: 3px 3px 0px 0px rgba(0, 0, 0, 1);
+  --neo-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 1);
+  --neo-shadow-sm: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+  --neo-shadow-hover: 3px 3px 0px 0px rgba(0, 0, 0, 1);
 
-  /* Border width */
-  --border-width-neo: 4px;
+  /* Border */
+  --neo-border-width: 4px;
 
   /* Typography */
-  --font-grotesk: 'Space Grotesk', sans-serif;
-  --font-mono: 'Space Mono', monospace;
+  --neo-font-primary: 'Space Grotesk', sans-serif;
+  --neo-font-mono: 'Space Mono', monospace;
 
   /* Transitions */
-  --transition-duration-neo: 150ms;
+  --neo-transition-duration: 150ms;
+}
+
+/* =============================================
+   Tailwind theme integration
+
+   Maps CSS variables to Tailwind utilities
+   e.g., bg-neo-primary, shadow-neo, border-neo
+   ============================================= */
+
+@theme {
+  /* Colors - generates bg-neo-*, text-neo-*, border-neo-* */
+  --color-neo-primary: var(--neo-primary);
+  --color-neo-secondary: var(--neo-secondary);
+  --color-neo-danger: var(--neo-danger);
+  --color-neo-success: var(--neo-success);
+  --color-neo-white: var(--neo-white);
+  --color-neo-black: var(--neo-black);
+
+  /* Shadows - generates shadow-neo, shadow-neo-sm, shadow-neo-hover */
+  --shadow-neo: var(--neo-shadow);
+  --shadow-neo-sm: var(--neo-shadow-sm);
+  --shadow-neo-hover: var(--neo-shadow-hover);
+
+  /* Border width - generates border-neo */
+  --border-width-neo: var(--neo-border-width);
+
+  /* Typography - generates font-grotesk, font-mono */
+  --font-grotesk: var(--neo-font-primary);
+  --font-mono: var(--neo-font-mono);
+
+  /* Transitions - generates duration-neo */
+  --transition-duration-neo: var(--neo-transition-duration);
 }

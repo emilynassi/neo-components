@@ -1,23 +1,30 @@
 import { type ButtonHTMLAttributes, type ReactNode, useMemo } from 'react';
+import { getContrastTextColor } from '@neobrut/core';
 
 interface NeoButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color'> {
   children: ReactNode;
-  primaryColor?: string;
-  textColor?: string;
+  color?: 'primary' | 'secondary' | 'danger' | 'success' | 'white' | string;
   size?: 'sm' | 'md' | 'lg';
   rotate?: boolean;
 }
 
+const presetColors: Record<string, string> = {
+  primary: 'bg-neo-primary text-neo-white',
+  secondary: 'bg-neo-secondary text-neo-black',
+  danger: 'bg-neo-danger text-neo-white',
+  success: 'bg-neo-success text-neo-white',
+  white: 'bg-neo-white text-neo-black',
+};
+
 const sizeClasses: Record<string, string> = {
-  sm: 'px-3 py-1.5 text-sm',
-  md: 'px-6 py-3 text-lg',
-  lg: 'px-8 py-4 text-xl',
+  sm: 'px-3 py-1.5 text-sm shadow-neo-sm',
+  md: 'px-6 py-3 text-lg shadow-neo',
+  lg: 'px-8 py-4 text-xl shadow-neo',
 };
 
 export function NeoButton({
   children,
-  primaryColor = '#4C7BF4',
-  textColor,
+  color = 'primary',
   size = 'md',
   disabled = false,
   rotate = false,
@@ -25,47 +32,38 @@ export function NeoButton({
   type = 'button',
   ...props
 }: NeoButtonProps) {
-  const computedTextColor = useMemo(() => {
-    if (textColor) return textColor;
-
-    if (primaryColor === '#FFFFFF' || primaryColor.toLowerCase() === '#fff') {
-      return '#000';
-    }
-
-    try {
-      const hex = primaryColor.replace('#', '');
-      const r = parseInt(hex.substring(0, 2), 16);
-      const g = parseInt(hex.substring(2, 4), 16);
-      const b = parseInt(hex.substring(4, 6), 16);
-      const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-      return brightness < 128 ? '#fff' : '#000';
-    } catch {
-      return '#000';
-    }
-  }, [primaryColor, textColor]);
+  const isCustomColor = !(color in presetColors);
 
   const buttonClasses = useMemo(() => {
     return [
-      'border-4 border-black font-bold shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]',
+      'border-4 border-black font-bold',
       sizeClasses[size],
-      !disabled && 'hover:translate-x-1 hover:translate-y-1 hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-2 active:translate-y-2 active:shadow-none transition-all',
+      !isCustomColor && presetColors[color],
+      !disabled && 'hover:translate-x-1 hover:translate-y-1 hover:shadow-neo-hover active:translate-x-1.5 active:translate-y-1.5 active:shadow-none transition-all',
       rotate && 'rotate-1',
       disabled && 'opacity-50 cursor-not-allowed',
       className,
     ]
       .filter(Boolean)
       .join(' ');
-  }, [size, disabled, rotate, className]);
+  }, [size, disabled, rotate, className, isCustomColor, color]);
+
+  const customStyles = useMemo(() => {
+    if (!isCustomColor) {
+      return {};
+    }
+    return {
+      backgroundColor: color,
+      color: getContrastTextColor(color),
+    };
+  }, [isCustomColor, color]);
 
   return (
     <button
       type={type}
       className={buttonClasses}
       disabled={disabled}
-      style={{
-        backgroundColor: primaryColor,
-        color: computedTextColor,
-      }}
+      style={customStyles}
       {...props}
     >
       {children}
