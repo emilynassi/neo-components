@@ -1,13 +1,24 @@
 {
   "name": "neobrut",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Neo-brutalist component library",
+  "type": "module",
   "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.26.1"
+  "packageManager": "pnpm@10.26.1",
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "eslint": "^9.39.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-vue": "^10.6.2",
+    "globals": "^16.5.0",
+    "typescript-eslint": "^8.50.1"
+  }
 }

@@ -79,6 +79,6 @@ const handleClick = (event: MouseEvent) => {
     :style="customStyles"
     @click="handleClick"
   >
-    <slot />
+    <slot></slot>
   </button>
 </template>
