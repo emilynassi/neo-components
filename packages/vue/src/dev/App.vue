@@ -2,6 +2,8 @@
 // Import components here as you build them
 import NeoButton from '../components/NeoButton.vue';
 import NeoBadge from '../components/NeoBadge.vue';
+import NeoCard from '../components/NeoCard.vue';
+import NeoHeading from '../components/NeoHeading.vue';
 </script>
 
 <template>
@@ -25,11 +27,9 @@ import NeoBadge from '../components/NeoBadge.vue';
           <div>
             <span
               class="text-xs font-bold uppercase text-gray-500 tracking-wider"
-              >NeoHeading xl</span
+               >NeoHeading xl</span
             >
-            <h3 class="text-5xl font-bold tracking-tight">
-              The Quick Brown Fox
-            </h3>
+            <NeoHeading size="xl">The Quick Brown Fox</NeoHeading>
           </div>
           <div>
             <span
@@ -325,23 +325,20 @@ import NeoBadge from '../components/NeoBadge.vue';
           </p>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <!-- Standard Card -->
-            <div class="border-4 border-black p-6 shadow-neo bg-white">
+            <NeoCard>
               <h3 class="text-xl font-bold mb-2">Standard Card</h3>
               <p class="text-gray-600">Default card with shadow and padding.</p>
-            </div>
+            </NeoCard>
 
-            <!-- Card with accent color -->
-            <div class="border-4 border-black p-6 shadow-neo bg-yellow-400">
+            <NeoCard color="secondary">
               <h3 class="text-xl font-bold mb-2">Colored Card</h3>
               <p>Cards can have background colors applied.</p>
-            </div>
+            </NeoCard>
 
-            <!-- Rotated Card -->
-            <div class="border-4 border-black p-6 shadow-neo bg-white rotate-2">
+            <NeoCard rotate>
               <h3 class="text-xl font-bold mb-2">Rotated Card</h3>
               <p class="text-gray-600">Adds playful tilt to the design.</p>
-            </div>
+            </NeoCard>
           </div>
 
           <p
@@ -350,28 +347,24 @@ import NeoBadge from '../components/NeoBadge.vue';
             Stat Cards (example composition)
           </p>
           <div class="flex flex-wrap gap-4 mb-8">
-            <div class="border-4 border-black p-4 shadow-neo bg-white">
+            <NeoCard padding="sm">
               <p class="text-4xl font-bold font-mono">8:47</p>
               <p class="text-xs font-bold uppercase tracking-wider mt-1">
                 AVG MINUTES
               </p>
-            </div>
-            <div
-              class="border-4 border-black p-4 shadow-neo bg-blue-500 text-white rotate-3"
-            >
+            </NeoCard>
+            <NeoCard color="primary" padding="sm" rotate>
               <p class="text-4xl font-bold font-mono">5:53</p>
               <p class="text-xs font-bold uppercase tracking-wider mt-1">
                 LAST 5 AVG
               </p>
-            </div>
-            <div
-              class="border-4 border-black p-4 shadow-neo bg-red-500 text-white -rotate-2"
-            >
+            </NeoCard>
+            <NeoCard color="danger" padding="sm">
               <p class="text-4xl font-bold font-mono">23</p>
               <p class="text-xs font-bold uppercase tracking-wider mt-1">
                 GAMES
               </p>
-            </div>
+            </NeoCard>
           </div>
 
           <p

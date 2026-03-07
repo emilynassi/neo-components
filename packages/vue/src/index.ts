@@ -1,5 +1,6 @@
 // Import styles (Tailwind + neo-brutalist tokens)
 import './styles.css'
 
-// Components will be exported here as we build them
-// export { default as NeoButton } from './components/NeoButton.vue'
+// Components
+export { default as NeoButton } from './components/NeoButton.vue'
+export { default as NeoCard } from './components/NeoCard.vue'
