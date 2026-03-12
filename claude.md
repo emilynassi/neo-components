@@ -2,7 +2,7 @@
 
 ## Working Style
 
-I want to do the work myself. Guide me through what to do step-by-step rather than writing all the code for me. Explain what we're doing and why so I understand each piece.
+When building new Vue components, use the `/new-vue-component` skill to scaffold them. You can write the code directly — no need to guide me step-by-step.
 
 ## Project Overview
 
