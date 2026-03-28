@@ -1,3 +1,18 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+import { NeoInput, NeoSelect } from '../../index';
+
+const email = ref('');
+const disabledValue = ref("Can't touch this");
+const selectedTeam = ref('');
+
+const teamOptions = [
+  { label: 'New York Rangers', value: 'nyr' },
+  { label: 'Boston Bruins', value: 'bos' },
+  { label: 'Toronto Maple Leafs', value: 'tor' },
+];
+</script>
+
 <template>
   <section class="mb-16 bg-white border-4 border-black p-8 shadow-neo">
     <h2
@@ -11,23 +26,22 @@
         <p class="text-xs font-bold uppercase text-gray-500 tracking-wider mb-4">
           NeoInput
         </p>
-        <label class="text-xs font-bold uppercase tracking-wider block mb-2">Email Address</label>
-        <input
+        <NeoInput
+          v-model="email"
           type="email"
+          label="Email Address"
           placeholder="you@example.com"
-          class="w-full px-4 py-3 text-lg border-4 border-black shadow-neo focus:outline-none focus:shadow-neo-hover focus:translate-x-0.5 focus:translate-y-0.5 transition-all placeholder:text-gray-400"
         />
+        <p class="text-sm text-gray-500 mt-2">Value: {{ email }}</p>
       </div>
 
       <div>
         <p class="text-xs font-bold uppercase text-gray-500 tracking-wider mb-4">
           NeoInput (disabled)
         </p>
-        <input
-          type="text"
-          value="Can't touch this"
+        <NeoInput
+          v-model="disabledValue"
           disabled
-          class="w-full px-4 py-3 text-lg border-4 border-black shadow-neo opacity-50 cursor-not-allowed bg-gray-100"
         />
       </div>
 
@@ -35,21 +49,13 @@
         <p class="text-xs font-bold uppercase text-gray-500 tracking-wider mb-4">
           NeoSelect
         </p>
-        <label class="text-xs font-bold uppercase tracking-wider block mb-2">Team</label>
-        <div class="relative">
-          <select
-            class="w-full px-4 py-3 text-lg border-4 border-black shadow-neo focus:outline-none focus:shadow-neo-hover focus:translate-x-0.5 focus:translate-y-0.5 transition-all appearance-none bg-white cursor-pointer"
-          >
-            <option>New York Rangers</option>
-            <option>Boston Bruins</option>
-            <option>Toronto Maple Leafs</option>
-          </select>
-          <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </div>
-        </div>
+        <NeoSelect
+          v-model="selectedTeam"
+          label="Team"
+          placeholder="Pick a team"
+          :options="teamOptions"
+        />
+        <p class="text-sm text-gray-500 mt-2">Value: {{ selectedTeam }}</p>
       </div>
 
       <div>

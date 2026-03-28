@@ -176,18 +176,15 @@ Vue components should use `<script setup lang="ts">` with `defineProps` and foll
 - [x] packages/vue Vite setup (library mode configured)
 - [x] Basic dev app structure (index.html, src/dev/main.ts, src/dev/App.vue)
 - [x] CSS architecture (core/src/styles.css imports Tailwind, vue imports core styles)
-
-### In Progress
-
-- [ ] Build Phase 2 components (Typography: NeoHeading, NeoText)
+- [x] Phase 2: Typography — NeoHeading, NeoText
+- [x] Phase 3 (partial): NeoButton, NeoInput, NeoSelect
+- [x] Phase 4 (partial): NeoCard, NeoBadge
 
 ### Next Steps
 
-1. Create NeoHeading component with sizes (xl, lg, md, sm)
-2. Create NeoText component with variants (body, label, stat) and sizes
-3. Add typography utility classes (.neo-heading-{size}, .neo-text-{variant})
-4. Build Phase 3 components (Form Components)
-5. Build Phase 4 components (Layout & Display)
+1. Build remaining Phase 3 components (NeoCheckbox, NeoRadio, NeoRadioGroup)
+2. Build remaining Phase 4 components (NeoDivider)
+3. Build Phase 5 components (NeoToggle / NeoButtonGroup, NeoTabs)
 
 ## Development Notes
 
