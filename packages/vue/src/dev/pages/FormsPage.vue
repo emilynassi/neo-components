@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { NeoInput, NeoSelect } from '../../index';
+import { NeoInput, NeoSelect, NeoCheckbox, NeoRadio, NeoRadioGroup } from '../../index';
 
 const email = ref('');
 const disabledValue = ref("Can't touch this");
 const selectedTeam = ref('');
+const checked1 = ref(true);
+const checked2 = ref(false);
+const checkedDisabled = ref(false);
+const selectedRadio = ref('option1');
 
 const teamOptions = [
   { label: 'New York Rangers', value: 'nyr' },
@@ -63,22 +67,9 @@ const teamOptions = [
           NeoCheckbox
         </p>
         <div class="space-y-3">
-          <label class="flex items-center gap-3 cursor-pointer group">
-            <div class="w-6 h-6 border-4 border-black bg-blue-500 flex items-center justify-center shadow-neo-sm group-hover:translate-x-0.5 group-hover:translate-y-0.5 group-hover:shadow-none transition-all">
-              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-              </svg>
-            </div>
-            <span class="font-medium">Checked option</span>
-          </label>
-          <label class="flex items-center gap-3 cursor-pointer group">
-            <div class="w-6 h-6 border-4 border-black bg-white shadow-neo-sm group-hover:translate-x-0.5 group-hover:translate-y-0.5 group-hover:shadow-none transition-all"></div>
-            <span class="font-medium">Unchecked option</span>
-          </label>
-          <label class="flex items-center gap-3 cursor-not-allowed opacity-50">
-            <div class="w-6 h-6 border-4 border-black bg-gray-100 shadow-neo-sm"></div>
-            <span class="font-medium">Disabled option</span>
-          </label>
+          <NeoCheckbox v-model="checked1" label="Checked option" />
+          <NeoCheckbox v-model="checked2" label="Unchecked option" />
+          <NeoCheckbox v-model="checkedDisabled" label="Disabled option" disabled />
         </div>
       </div>
 
@@ -86,18 +77,12 @@ const teamOptions = [
         <p class="text-xs font-bold uppercase text-gray-500 tracking-wider mb-4">
           NeoRadio
         </p>
-        <div class="space-y-3">
-          <label class="flex items-center gap-3 cursor-pointer group">
-            <div class="w-6 h-6 border-4 border-black bg-white rounded-full shadow-neo-sm group-hover:translate-x-0.5 group-hover:translate-y-0.5 group-hover:shadow-none transition-all flex items-center justify-center">
-              <div class="w-2.5 h-2.5 bg-black rounded-full"></div>
-            </div>
-            <span class="font-medium">Selected option</span>
-          </label>
-          <label class="flex items-center gap-3 cursor-pointer group">
-            <div class="w-6 h-6 border-4 border-black bg-white rounded-full shadow-neo-sm group-hover:translate-x-0.5 group-hover:translate-y-0.5 group-hover:shadow-none transition-all"></div>
-            <span class="font-medium">Unselected option</span>
-          </label>
-        </div>
+        <NeoRadioGroup v-model="selectedRadio">
+          <NeoRadio value="option1" label="Selected option" />
+          <NeoRadio value="option2" label="Unselected option" />
+          <NeoRadio value="option3" label="Another option" />
+        </NeoRadioGroup>
+        <p class="text-sm text-gray-500 mt-2">Value: {{ selectedRadio }}</p>
       </div>
     </div>
   </section>
